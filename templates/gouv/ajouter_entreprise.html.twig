@@ -1,0 +1,19 @@
+{% extends 'gouv/index.html.twig' %}
+
+{% block title %}Liste des entreprises{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <br>
+        <h1>Ajouter une entreprise</h1>
+        <hr>
+        {{ form_start(societyForm) }}
+        {{ form_widget(societyForm) }}
+        <button class="btn btn-warning" type="submit">Valider</button>
+        {{ form_end(societyForm) }}
+
+
+    </div>
+
+{% endblock %}

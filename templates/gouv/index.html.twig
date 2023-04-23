@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome GOUV{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="{{ path ('app_home_gouv') }}" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <i class="fs-4 bi-shield-fill"></i> </i> <span class="fs-5 ms-2 d-none d-sm-inline">GOUV PANEL</span>
+                    </a>
+                    <a class="text-decoration-none text-light" href="#">Bienvenue {{ app.user.prenom | capitalize }} {{ app.user.nom | upper }}</a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link align-middle px-0 text-warning">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline ">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle text-warning">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Effectifs</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-warning">
+                                <i class="fs-4 bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">Citoyen</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="{{ path ('app_administred_gouv') }}" class="nav-link ms-3 px-0 text-warning"> <i class="bi bi-person-fill"></i> <span class="d-none d-sm-inline">Citoyen</span></a>
+                                </li>
+                                {# <li>
+                                    <a href="#" class="nav-link ms-3 px-0 text-primary"> <i class="bi bi-journal-bookmark-fill"></i> <span class="d-none d-sm-inline">Plainte</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link ms-3 px-0 text-primary"> <i class="bi bi-search"></i> <span class="d-none d-sm-inline">Enquête</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link ms-3 px-0 text-primary"> <i class="bi bi-key"></i> <span class="d-none d-sm-inline">Vol de véhicule</span></a>
+                                </li>#}
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-warning">
+                                <i class="fs-4 bi-buildings-fill"></i> <span class="ms-1 d-none d-sm-inline">Entreprise</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="{{ path ('app_society') }}" class="nav-link ms-3 px-0 text-warning"> <i class="bi bi-person-fill"></i> <span class="d-none d-sm-inline">Entreprise</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path ('app_gouv_facture') }}" class="nav-link ms-3 px-0 text-warning">
+                                        <i class="bi bi-table"></i> <span class="ms-1 d-none d-sm-inline">Facturation</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link ms-3 px-0 text-warning"> <i class="bi bi-journal-bookmark-fill"></i> <span class="d-none d-sm-inline">Liste des impots</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_vehicle_gouv') }}" class="nav-link px-0 align-middle text-warning">
+                                <i class="fs-4 bi-car-front-fill"></i> <span class="ms-1 d-none d-sm-inline">Parc véhicule</span></a>
+                        </li>
+
+                        <li>
+                            <a href="{{ path ('app_gouv_finance') }}" class="nav-link px-0 align-middle text-warning">
+                                <i class="fs-4 bi-currency-dollar"></i> <span class="ms-1 d-none d-sm-inline">Finances</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('app_logout') }}" class="nav-link px-0 align-middle text-warning">
+                                <i class="fs-4 bi-box-arrow-left"></i> <span class="ms-1 d-none d-sm-inline">Déconnexion</span> </a>
+                        </li>
+
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+            <div class="col" style="background-color: #fefee3">
+                {% block content %}{% endblock %}
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

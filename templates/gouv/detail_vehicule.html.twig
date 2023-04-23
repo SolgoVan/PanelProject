@@ -1,0 +1,116 @@
+{% extends 'gouv/index.html.twig' %}
+
+{% block title %}Parc véhicule{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+    <div class="row">
+        <div class="col-10"><h1>{{ vehicle.name }}</h1></div>
+        <div class="col-2"><button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Options</button></div>
+        <hr>
+        <br>
+        <div>
+            {% if vehicle.available == false %}
+                <img style="z-index: 2" src="{{ asset ('img/vehicle/dispo.jpg') }}" alt="">
+            {% else %}
+                <div class="row">
+                    <div class="col"><img src="{{ asset ('img/vehicle/'~ vehicle.file) }}" alt="" height="350px"></div>
+                    <div class="col m-2 bg-warning bg-opacity-25 border border-warning rounded">
+                        <div class=""><h2>Plaque : {{ vehicle.plate }}</h2></div>
+                        <br>
+                        <div><h4>Unité : {{ vehicle.unity }}</h4></div>
+                        <div><h4>Type : {{ vehicle.type }}</h4></div>
+                        <div><h4>Permis : {{ vehicle.license | upper }}</h4></div>
+                        <div><h4>Amélioration : {{ vehicle.upgrade }}</h4></div>
+                        <div><h4>Localisation : {{ vehicle.local }}</h4></div>
+                    </div>
+
+                </div>
+                <br>
+                Amélioration
+                <hr>
+
+                {# ARMURE #}
+
+                <div class="row">
+                    <div class="col-2">Armure :</div>
+                    {% if (vehicle.performance.armure is not defined) %} Non renseigné {% else %}
+                    <div class="col-3 progress" role="progressbar" aria-label="Warning example" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5">
+                        <div class="progress-bar bg-warning " style="width: {{ vehicle.performance.armure * 20 }}%"></div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {# FREIN #}
+
+                <div class="row">
+                    <div class="col-2">Frein :</div>
+                    {% if (vehicle.performance.frein is not defined) %} Non renseigné {% else %}
+                    <div class="col-3 progress" role="progressbar" aria-label="Warning example" aria-valuenow="5" aria-valuemin="0" aria-valuemax="3">
+                        <div class="progress-bar bg-warning " style="width: {{ vehicle.performance.frein * 34 }}%"></div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {# MOTEUR #}
+
+                <div class="row">
+                    <div class="col-2">Moteur :</div>
+                    {%  if (vehicle.performance.moteur is not defined) %} Non renseigné {% else %}
+                    <div class="col-3 progress" role="progressbar" aria-label="Warning example" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5">
+                        <div class="progress-bar bg-warning " style="width: {{ vehicle.performance.moteur * 25 }}%"></div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {# SUSPENSION #}
+
+                <div class="row">
+                    <div class="col-2">Suspension :</div>
+                    {% if (vehicle.performance.suspension is not defined) %} Non renseigné {% else %}
+                    <div class="col-3 progress" role="progressbar" aria-label="Warning example" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5">
+                        <div class="progress-bar bg-warning " style="width: {{ vehicle.performance.suspension * 25 }}%"></div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {# TRANSMISSION #}
+
+                <div class="row">
+                    <div class="col-2">Transmission :</div>
+                    {% if (vehicle.performance.transmission is not defined) %} Non renseigné {% else %}
+                    <div class="col-3 progress" role="progressbar" aria-label="Warning example" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5">
+                        <div class="progress-bar bg-warning " style="width: {{ vehicle.performance.transmission * 34 }}%"></div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {# TURBO #}
+
+                <div class="row">
+                    <div class="col-2">Turbo :</div>
+                    {% if (vehicle.performance.turbo is not defined) %} Non renseigné {% else %}
+                    <div class="col-3 progress" role="progressbar" aria-label="Warning example" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5">
+                        <div class="progress-bar bg-warning " style="width: {{ vehicle.performance.turbo * 100 }}%"></div>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+
+        {# Menu offcanvas droite #}
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div><button class="btn btn-warning m-2"><a class="text-decoration-none" href="{{ path ('app_add_perf', {id: vehicle.id}) }}">Ajouter performance</a></button></div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

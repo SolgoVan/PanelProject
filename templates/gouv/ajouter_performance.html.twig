@@ -1,0 +1,17 @@
+{% extends 'gouv/index.html.twig' %}
+
+{% block title %}Ajout performance{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <h1>Performance</h1>
+        <hr>
+
+        <br>
+        {{ form_start(perfForm) }}
+        {{ form_widget(perfForm) }}
+        <button class="btn btn-warning" type="submit">Valider</button>
+        {{ form_end(perfForm) }}
+    </div>
+{% endblock %}

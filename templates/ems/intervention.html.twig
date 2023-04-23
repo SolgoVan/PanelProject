@@ -1,0 +1,43 @@
+{% extends 'ems/index.html.twig' %}
+
+{% block title %}Nouvelle intevervention{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <h1>Nouvelle intervention</h1>
+        <hr>
+        {{ form_start(medicalFileForm) }}
+        <div class="row">
+            <div class="col-3">{{ form_row(medicalFileForm.nom) }}</div>
+            <div class="col-3">{{ form_row(medicalFileForm.prenom) }}</div>
+            <div class="col-1"></div>
+            <div class="col-3">{{ form_row(medicalFileForm.doc) }}</div>
+        </div>
+        <hr class="col-10">
+        <div class="col-6">{{ form_row(medicalFileForm.motif) }}</div>
+        <div class="row">
+            <div class="col-6">{{ form_row(medicalFileForm.examen) }}</div>
+            <div class="col-1"></div>
+            <div class="col-2">{{ form_row(medicalFileForm.montant) }}</div>
+
+        </div>
+        <div class="row">
+            <div class="col-6">{{ form_row(medicalFileForm.soin) }}</div>
+            <div class="col-1"></div>
+            <div class="col-2 form-check form-switch">{{ form_row(medicalFileForm.facture) }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 ">{{ form_row(medicalFileForm.annexe) }}</div>
+            <div class="col-1"></div>
+            <div hidden class="col-2">{{ form_row(medicalFileForm.date) }}</div>
+        </div>
+
+
+        <div><button class="btn btn-danger" type="submit">Valider</button></div>
+        {{ form_end(medicalFileForm) }}
+
+
+    </div>
+{% endblock %}

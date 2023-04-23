@@ -1,0 +1,52 @@
+{% extends 'gouv/index.html.twig' %}
+
+{% block title %}Liste des entreprises{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+    <div class="row">
+        <div class="col-10"><h1>Entreprise</h1></div>
+        <div class="col-2"><button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Options</button></div>
+            <hr>
+
+        <table class="table table-warning table-striped table-bordered border-warning">
+            <thead>
+            <tr>
+                <th class="col-3">Nom :</th>
+                <th class="col-3">Gérant :</th>
+                <th class="col-2">Type :</th>
+                <th class="col-1">Active :</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%  for society in societies %}
+                <tr>
+                    <td><a class="text-decoration-none text-dark" href="{{ path ('app_detail_entreprise', {'id':society.id}) }}">{{ society.nom }}</a></td>
+                    <td>{{ society.patron }}</td>
+                    <td>{{ society.type | capitalize }}</td>
+                    <td>{% if (society.locked == true) %} ❌  {% elseif (society.locked == false) %} ✅ {% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div class="pagination">
+            {{ knp_pagination_render(societies) }}
+        </div>
+
+
+        {# Menu offcanvas droite #}
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div><button class="btn btn-warning m-2"><a class="text-decoration-none" href="{{ path ('app_add_society') }}">Ajouter une entrprise</a></button></div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

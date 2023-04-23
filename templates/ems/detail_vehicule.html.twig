@@ -1,0 +1,27 @@
+{% extends 'ems/index.html.twig' %}
+
+{% block title %}Parc véhicule{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <h1>{{ vehicle.name }}</h1>
+        <hr>
+        <br>
+        <div>
+            {% if vehicle.available == false %}
+            <img style="z-index: 2" src="{{ asset ('img/vehicle/dispo.jpg') }}" alt="">
+            {% else %}
+            <div class="row">
+                <div class="col"><img src="{{ asset ('img/vehicle/'~ vehicle.file) }}" alt="" height="350px"></div>
+                <div class="col m-2"><h2>Plaque : {{ vehicle.plate }}</h2></div>
+            </div>
+            <div>Type : {{ vehicle.type }}</div>
+            <div>Permis : {{ vehicle.license | upper }}</div>
+            <div>Amélioration : {{ vehicle.upgrade }}</div>
+            {% endif %}
+        </div>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'ems/index.html.twig' %}
+
+{% block title %}Effectif{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-10">
+                <h1>Effectif</h1>
+            </div>
+            {% if (app.user.level > 2 ) %}
+            <div class="col-2"><button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Options</button>
+        </div>
+            {% endif %}
+        </div>
+        <hr>
+        <table class="table table-danger table-striped table-bordered border-danger">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Numéro de téléphone</th>
+                <th scope="col">Grade</th>
+            </tr>
+            </thead>
+            <tboby>
+                {% for citoyen in effectif %}
+                    <tr>
+                        <td>{{ citoyen.nom | upper  }}</td>
+                        <td>{{ citoyen.prenom | capitalize }}</td>
+                        <td>{{ citoyen.telephone  }}</td>
+                        <td>{{ citoyen.profession }}</td>
+                    </tr>
+                {% endfor %}
+            </tboby>
+        </table>
+
+        {# Menu offcanvas droite #}
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div><button class="btn btn-danger m-2"><a class="text-decoration-none text-light" href="#">Ajouter effectif</a></button></div>
+                <div><button class="btn btn-danger m-2"><a class="text-decoration-none text-light" href="#">Modifier effectif</a></button></div>
+                <div><button class="btn btn-danger m-2"><a class="text-decoration-none text-light" href="#">Supprimer effectif</a></button></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

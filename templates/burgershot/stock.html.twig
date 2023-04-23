@@ -1,0 +1,201 @@
+{% extends 'burgershot/index.html.twig' %}
+
+{% block title %}Stock{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+    <div class="row">
+        <div class="col-10"><h1>Stock</h1></div>
+        <div class="col-2"><button class="btn btn-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Options</button></div>
+        <hr>
+        <div>
+            <div class="row">
+                <div class="col-6">
+                    <h3>Ingrédients de base</h3>
+                    <table class="table table-info table-striped table-bordered border-info">
+                        <thead>
+                        <tr>
+                            <th class="col-3">Produit</th>
+                            <th class="col-2">Quantité</th>
+                            {% if (app.user.level > 1) %}
+                            <th class="col-1">Options</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for stock1 in stock1 %}
+                        <tr>
+                            <td>{{ stock1.nom | capitalize }}</td>
+                            {% if (stock1.quantite) < 100 %}
+                            <td style="font-weight: bold" class="text-danger"> {{ stock1.quantite  }}</td> {% else %} <td> {{ stock1.quantite }} </td> {% endif %}
+                            <td>
+                                {#  {% if (app.user.level > 1) %}
+                                    <a class="text-decoration-none text-dark ms-4" href="{{ path ('app_burgershot_stock_up', {'id':stock1.id}) }}"><i class="bi bi-plus-circle"></i></a>
+                                {% endif %}
+                                {% if (app.user.level > 2) %}
+                                    <a class="text-decoration-none text-dark ms-4" href="#"><i class="bi bi-trash"></i></a>
+                                {% endif %}#}
+                                <button type="button" class="btn btn-info" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" data-bs-toggle="modal" data-bs-target="#updateStockModal1{{ stock1.id }}">Modifier
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <div class="modal fade" id="updateStockModal1{{ stock1.id }}" tabindex="-1" aria-labelledby="updateStockModalLabel{{ stock1.id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="stockModalLabel">Modification du stock</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ path ('quantite_up', {id:stock1.id}) }}" method="post">
+                                            <div class="form-group">
+                                                <label for="quantite">Quantité</label>
+                                                <input type="number" id="quantite" name="quantite" class="form-control" value="{{ stock1.quantite }}" required>
+                                            </div>
+                                            <br>
+                                            <button class="btn btn-info">Valider</button>
+                                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Retour</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="col-6">
+                    <h3>Produits pret à la vente</h3>
+                    <table class="table table-info table-striped table-bordered border-info">
+                        <thead>
+                        <tr>
+                            <th class="col-3">Produit</th>
+                            <th class="col-2">Quantité</th>
+                            {% if (app.user.level > 1) %}
+                                <th class="col-1">Options</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for stock3 in stock3 %}
+                        <tr>
+                            <td>{{ stock3.nom | capitalize }}</td>
+                            {% if (stock3.quantite) < 50 %}
+                                <td style="font-weight: bold" class="text-danger"> {{ stock3.quantite  }}</td> {% else %} <td> {{ stock3.quantite }} </td> {% endif %}
+                            <td>
+                                {#  {% if (app.user.level > 1) %}
+                                    <a href="{{ path ('app_burgershot_stock_up', {'id':stock3.id}) }}" class="text-decoration-none text-dark ms-4"><i class="bi bi-plus-circle"></i></a>
+                                {% endif %}
+                                {% if (app.user.level >2) %}
+                                    <a href="#" class="text-decoration-none text-dark ms-4"><i class="bi bi-trash"></i></a>
+                                {% endif %}#}
+                                <button type="button" class="btn btn-info" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" data-bs-toggle="modal" data-bs-target="#updateStockModal3{{ stock3.id }}">Modifier
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <div class="modal fade" id="updateStockModal3{{ stock3.id }}" tabindex="-1" aria-labelledby="updateStockModalLabel{{ stock3.id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="stockModalLabel">Modification du stock</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ path ('quantite_up', {id:stock3.id}) }}" method="post">
+                                            <div class="form-group">
+                                                <label for="quantite">Quantité</label>
+                                                <input type="number" id="quantite" name="quantite" class="form-control" value="{{ stock3.quantite }}" required>
+                                            </div>
+                                            <br>
+                                            <button class="btn btn-info">Valider</button>
+                                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Retour</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <h3>Ingrédients transformé</h3>
+                    <table class="table table-info table-striped table-bordered border-info">
+                        <thead>
+                        <tr>
+                            <th class="col-3">Produit</th>
+                            <th class="col-2">Quantité</th>
+                            {%  if (app.user.level > 1) %}
+                                <th class="col-1">Options</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for stock2 in stock2 %}
+                        <tr>
+                            <td>{{ stock2.nom | capitalize }}</td>
+                            {% if (stock2.quantite) < 100 %}
+                                <td style="font-weight: bold" class="text-danger"> {{ stock2.quantite  }}</td> {% else %} <td> {{ stock2.quantite }} </td> {% endif %}
+                            <td>
+                                {# {% if (app.user.level > 1) %}
+                                    <a class="text-decoration-none text-dark ms-4" href="{{ path ('app_burgershot_stock_up', {'id':stock2.id}) }}"><i class="bi bi-plus-circle"></i></a>
+                                {% endif %}
+                                {% if (app.user.level >2) %}
+                                    <a href="#" class="text-decoration-none text-dark ms-4"><i class="bi bi-trash"></i></a>
+                                {% endif %} #}
+                                <button type="button" class="btn btn-info" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" data-bs-toggle="modal" data-bs-target="#updateStockModal2{{ stock2.id }}">Modifier
+                                </button>
+                            </td>
+                        </tr>
+                        <div class="modal fade" id="updateStockModal2{{ stock2.id }}" tabindex="-1" aria-labelledby="updateStockModalLabel{{ stock2.id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="stockModalLabel">Modification du stock</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ path ('quantite_up', {id:stock2.id}) }}" method="post">
+                                            <div class="form-group">
+                                                <label for="quantite">Quantité</label>
+                                                <input type="number" id="quantite" name="quantite" class="form-control" value="{{ stock2.quantite }}" required>
+                                            </div>
+                                            <br>
+                                            <button class="btn btn-info">Valider</button>
+                                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Retour</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

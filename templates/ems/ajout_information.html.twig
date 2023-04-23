@@ -1,0 +1,73 @@
+{% extends 'ems/index.html.twig' %}
+
+{% block title %}Ajout information{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <h1>Ajout information médical</h1>
+        <hr>
+        <br>
+        {{ form_start(healthForm) }}
+        <div class="row">
+            <div class="col-2">{{ form_row(healthForm.taille) }}</div>
+            <div class="col-2">{{ form_row(healthForm.poids) }}</div>
+            <div class="col-2">{{ form_row(healthForm.tabac) }}</div>
+            <div class="col-2">{{ form_row(healthForm.alcool) }}</div>
+            <div class="col-2">{{ form_row(healthForm.drogue) }}</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-8"><h4>Médical</h4></div>
+            <div class="col-4"><h4>Personne à contacter en cas d'urgence</h4></div>
+        </div>
+        <hr class="col-12">
+        <div class="row">
+            <div class="col-2 form-check form-switch">{{ form_row(healthForm.allergie) }}</div>
+            <div class="col-5">{{ form_row(healthForm.comment_allergie) }}</div>
+            <div class="col-1"></div>
+            <div class="col-4">{{ form_row(healthForm.urg_nom) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-check form-switch">{{ form_row(healthForm.diabete) }}</div>
+            <div class="col-5">{{ form_row(healthForm.comment_diabete) }}</div>
+            <div class="col-1"></div>
+            <div class="col-4">{{ form_row(healthForm.urg_prenom) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-check form-switch">{{ form_row(healthForm.asthme) }}</div>
+            <div class="col-5">{{ form_row(healthForm.comment_asthme) }}</div>
+            <div class="col-1"></div>
+            <div class="col-4">{{ form_row(healthForm.urg_telephone) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-check form-switch">{{ form_row(healthForm.cardiaque) }}</div>
+            <div class="col-5">{{ form_row(healthForm.comment_cardiaque) }}</div>
+            <div class="col-1"></div>
+            <div class="col-4">{{ form_row(healthForm.comment_urg) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-check form-switch">{{ form_row(healthForm.epilepsie) }}</div>
+            <div class="col-5">{{ form_row(healthForm.comment_epilepsie) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-check form-switch">{{ form_row(healthForm.antecedent) }}</div>
+            <div class="col-5">{{ form_row(healthForm.comment_boolean) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-check form-switch">{{ form_row(healthForm.traitement) }}</div>
+            <div class="col-5">{{ form_row(healthForm.comment_traitement) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-2">Groupe sanguin</div>
+            <div class="col-5">{{ form_row(healthForm.groupe_sanguin) }}</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-10">{{ form_row(healthForm.post_it) }}</div>
+        </div>
+        <br>
+        <button class="btn btn-danger" type="submit">Ajouter</button>
+        {{ form_end(healthForm) }}
+    </div>
+{% endblock %}

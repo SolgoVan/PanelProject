@@ -1,0 +1,40 @@
+{% extends 'fdo/index.html.twig' %}
+
+{% block title %}Liste des citoyens{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <h1>Listes des citoyens</h1>
+        <section>
+            <br>
+            <hr>
+            <table class="table table-primary table-striped table-bordered border-primary">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Numéro de téléphone</th>
+                    <th scope="col">Profession</th>
+                    <th scope="col">Détail</th>
+                </tr>
+                </thead>
+                <tboby>
+                    {% for citoyen in citoyens %}
+                        <tr>
+                            <td>{{ citoyen.nom | upper  }}</td>
+                            <td>{{ citoyen.prenom | capitalize }}</td>
+                            <td>{{ citoyen.telephone }}</td>
+                            <td>{{ citoyen.profession | title }}</td>
+                            <td><a class="text-decoration-none" href="{{ path('app_detail', {'id':citoyen.id}) }}">➡</a> {% if (citoyen.criminal == true) %}🔗{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tboby>
+            </table>
+            <br>
+            <div class="pagination">
+                {{ knp_pagination_render(citoyens) }}
+            </div>
+        </section>
+    </div>
+{% endblock %}

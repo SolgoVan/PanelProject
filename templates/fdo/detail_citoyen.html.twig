@@ -1,0 +1,126 @@
+{% extends 'fdo/index.html.twig' %}
+
+{% block title %}{{ citoyen.nom }} {{ citoyen.prenom }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <h1>{{ citoyen.nom | upper}} {{ citoyen.prenom | capitalize }}</h1>
+        <hr>
+        <div class="row">
+            <div class="col-2">Date de niassance</div>
+            <div class="col-2">{{ citoyen.dateNaissance | date('d-m-Y')}}</div>
+        </div>
+        <hr class="col-4">
+        <div class="row">
+            <div class="col-2">Age</div>
+            <div class="col-2">Ans</div>
+        </div>
+        <hr class="col-4">
+        <div class="row">
+            <div class="col-2">Numéro de téléphone</div>
+            <div class="col-2">{{ citoyen.telephone }}</div>
+        </div>
+        <hr class="col-4">
+        <div class="row">
+            <div class="col-2">Profession</div>
+            <div class="col-2">{{ citoyen.profession | capitalize }}</div>
+        </div>
+
+        <hr class="col-4">
+        <div>
+            {% if (citoyen.criminal == false) and (app.user.level > 2) %}
+                <button class="btn btn-primary">Nouveau casier judicière</button>
+            {% elseif (citoyen.criminal == true) %}
+                <button class="btn btn-primary">Consulter casier judicière</button>
+            {% endif %}
+        </div>
+        <br>
+        <div>
+            {% if (citoyen.permis.id is not defined) %}
+                <div>Aucune information sur les permis n'est enregistré</div>
+                <br>
+                <button class="btn btn-primary">Ajout permis</button>
+            {% else %}
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Permis
+            </button>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if (citoyen.permis.id is not defined) %}
+
+    {% else %}
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Liste des permis</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td class="col-2">Moto :</td>
+                            <td class="col-2">
+                                {% if (citoyen.permis.a == true) %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-2">Voiture :</td>
+                            <td class="col-2">
+                                {% if (citoyen.permis.b == true) %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-2">Camion :</td>
+                            <td class="col-2">
+                                {% if (citoyen.permis.c == true) %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-2">Hélicoptère :</td>
+                            <td class="col-2">
+                                {% if (citoyen.permis.h == true) %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-2">Avion :</td>
+                            <td class="col-2">
+                                {% if (citoyen.permis.z == true) %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

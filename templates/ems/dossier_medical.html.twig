@@ -1,0 +1,45 @@
+{% extends 'ems/index.html.twig' %}
+
+{% block title %}Dossier médical{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-10"><h1>Liste des dossiers</h1></div>
+            <div class="col-2"><button class="btn btn-danger" type="button"><a class="text-light text-decoration-none" href="{{ path ('app_intervention') }}">Nouvelle intervention</a></button>
+            </div>
+        </div>
+        <hr>
+        {% for medicalFile in files %}
+        <div class="card border-danger bg-danger bg-opacity-10 p-3">
+            <div>{{ medicalFile.date | date ('d-m-Y H:i ') }}</div>
+            <div style="font-weight: bold">{{ medicalFile.nom | upper }} {{ medicalFile.prenom | capitalize }}</div>
+            <br>
+            <div class="row">
+                <div class="col-2">Motif :</div>
+                <div class="col-9">{{ medicalFile.motif }}</div>
+            </div>
+            <div class="row">
+                <div class="col-2">Examen :</div>
+                <div class="col-9">{{ medicalFile.examen }}</div>
+            </div>
+            <div class="row">
+                <div class="col-2">Soin :</div>
+                <div class="col-9">{{ medicalFile.soin }}</div>
+            </div>
+            <div class="row">
+                <div class="col-2">Commentaire :</div>
+                <div class="col-9">{{ medicalFile.annexe }}</div>
+            </div>
+
+            <div>Facturé : {% if (medicalFile.facture == true) %}✅{% else %}❌{% endif %}</div>
+        </div>
+            <br>
+        {% endfor %}
+        <div class="pagination">
+            {{ knp_pagination_render(files) }}
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'gouv/index.html.twig' %}
+
+{% block title %}Parc véhicule{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-3"><h1>Parc véhicule</h1></div>
+            <div class="col-2"></div>
+            <div class="col-3"><select class="form-select bg-dark bg-opacity-10">{% for vehicle in vehicles %}
+                        <option value="{{ vehicle.name }}">{{ vehicle.name }} {{ vehicle.plate }}</option>
+                    {% endfor %}
+                </select></div>
+        </div>
+        <br>
+        <hr>
+        <table class="table table-warning table-striped table-bordered border-warning">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Plaque</th>
+                <th scope="col">Unité</th>
+                <th scope="col">Permis</th>
+                <th scope="col">Type</th>
+                <th scope="col">Up</th>
+                <th scope="col">Disponible</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for vehicle in vehicles %}
+                <tr>
+                    <td><a class="text-decoration-none text-dark" href="{{ path ('app_detail_vehicle_gouv', {'id':vehicle.id}) }}">{{ vehicle.name }}</a></td>
+                    <td style="font-weight: bold">{{ vehicle.plate }}</td>
+                    <td>{{ vehicle.unity }}</td>
+                    <td>{{ vehicle.license | upper }}</td>
+                    <td>{{ vehicle.type | capitalize }}</td>
+                    <td>{% if vehicle.performance.armure is not defined and vehicle.performance.frein is not defined and vehicle.performance.moteur is not defined and vehicle.performance.suspension is not defined and vehicle.performance.transmission is not defined and vehicle.performance.turbo is not defined %} ∅
+                        {% elseif vehicle.performance.armure + vehicle.performance.frein + vehicle.performance.moteur + vehicle.performance.suspension + vehicle.performance.transmission + vehicle.performance.turbo <= 12 %} ★
+                        {% elseif vehicle.performance.armure + vehicle.performance.frein + vehicle.performance.moteur + vehicle.performance.suspension + vehicle.performance.transmission + vehicle.performance.turbo > 12 %} ★★ {% endif %}</td>
+                    <td>{% if vehicle.available == true %} ✅ {% else %} ❌ {% endif %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div class="pagination">
+            {{ knp_pagination_render(vehicles) }}
+        </div>
+    </div>
+
+{% endblock %}

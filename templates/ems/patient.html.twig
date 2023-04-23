@@ -1,0 +1,60 @@
+{% extends 'ems/index.html.twig' %}
+
+{% block title %}Liste des patients{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-10"><h1>Listes des patients</h1></div>
+            {%  if (app.user.level > 1) %}
+            <div class="col-2"><button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Options</button>
+            </div>
+            {% endif %}
+        </div>
+
+        <section class="series-list">
+            <br>
+            <hr>
+            <table class="table table-danger table-striped table-bordered border-danger">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Date de naissance</th>
+                </tr>
+                </thead>
+                <tboby>
+                    {% for citoyen in citoyens %}
+                        <tr>
+                            <td><a class="text-decoration-none text-dark" href="{{ path ('app_detail_patient', {'id':citoyen.id}) }}">{{ citoyen.nom | upper  }}</a></td>
+                            <td>{{ citoyen.prenom | capitalize }}</td>
+                            <td>{{ citoyen.dateNaissance |date('d-m-Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tboby>
+            </table>
+            <br>
+            <div class="pagination bs-danger">
+                {{ knp_pagination_render(citoyens) }}
+            </div>
+        </section>
+
+        {# Menu offcanvas droite #}
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div><button class="btn btn-danger m-2"><a class="text-decoration-none text-light" href="#">Ajouter patient</a></button></div>
+                <div><button class="btn btn-danger m-2"><a class="text-decoration-none text-light" href="#">Modifier patient</a></button></div>
+                {% if (app.user.level > 2 ) %}
+                <div><button class="btn btn-danger m-2"><a class="text-decoration-none text-light" href="#">Supprimer patient</a></button></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

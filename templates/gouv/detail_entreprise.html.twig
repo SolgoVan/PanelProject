@@ -1,0 +1,30 @@
+{% extends 'gouv/index.html.twig' %}
+
+{% block title %}Parc véhicule{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-10"><h1>{{ society.nom }}</h1></div>
+            <div class="col-2"><button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Options</button></div>
+            <hr>
+            <br>
+
+        </div>
+
+
+        {# Menu offcanvas droite #}
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div><button class="btn btn-warning m-2"><a class="text-decoration-none" href="{{ path ('app_gouv_add_invoice', {id: society.id}) }}">Nouvelle facture</a></button></div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

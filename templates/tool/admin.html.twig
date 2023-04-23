@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome ADMIN{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Votez PETERSON</h1>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-4"><a href="{{ path ('app_home_ems') }}">EMS</a></div>
+            <div class="col-4"><a href="{{ path ('app_home_fdo') }}">FDO</a></div>
+            <div class="col-4"><a href="{{ path ('app_home_gouv') }}">Gouv</a></div>
+        </div>
+    </div>
+{% endblock %}

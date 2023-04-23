@@ -1,0 +1,51 @@
+{% extends 'fdo/index.html.twig' %}
+
+{% block title %}Parc véhicule{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-3"><h1>Parc véhicule</h1></div>
+            <div class="col-2"></div>
+            <div class="col-3"><select class="form-select">{% for vehicle in vehicles %}
+                    <option value="{{ vehicle.name }}">{{ vehicle.name }} {{ vehicle.plate }}</option>
+                {% endfor %}
+                </select></div>
+        </div>
+
+        <br>
+        <hr>
+        <table class="table table-primary table-striped table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Plaque</th>
+                    <th scope="col">Unité</th>
+                    <th scope="col">Permis</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Up</th>
+                    <th scope="col">Disponible</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for vehicle in vehicles %}
+                <tr>
+                    <td><a class="text-decoration-none text-dark" href="{{ path ('app_detail_vehicle_fdo', {'id':vehicle.id}) }}">{{ vehicle.name }}</a></td>
+                    <td style="font-weight: bold">{{ vehicle.plate }}</td>
+                    <td>{{ vehicle.unity }}</td>
+                    <td>{{ vehicle.license | upper }}</td>
+                    <td>{{ vehicle.type | capitalize }}</td>
+                    <td>{% if vehicle.upgrade == 0 %} ∅ {% elseif vehicle.upgrade ==1 %} ★ {% elseif vehicle.upgrade == 2 %} ★★ {% endif %}</td>
+                    <td>{% if vehicle.available == true %} ✅ {% else %} ❌ {% endif %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div class="pagination">
+            {{ knp_pagination_render(vehicles) }}
+        </div>
+    </div>
+
+{% endblock %}

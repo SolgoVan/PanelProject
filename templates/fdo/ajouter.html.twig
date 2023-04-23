@@ -1,0 +1,19 @@
+{% extends 'fdo/index.html.twig' %}
+
+{% block title %}Ajout citoyens{% endblock %}
+
+
+{% block content %}
+    <br>
+    <div class="container">
+        <h1>Ajout citoyen</h1>
+            <hr>
+            <br>
+                <div class="col-4">
+                    {{ form_start(citizenForm) }}
+                    {{ form_widget(citizenForm) }}
+                    <button class="btn btn-primary" type="submit">Ajouter</button>
+                    {{ form_end(citizenForm) }}
+                </div>
+    </div>
+{% endblock %}

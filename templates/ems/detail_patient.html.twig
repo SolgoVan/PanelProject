@@ -1,0 +1,285 @@
+{% extends 'ems/index.html.twig' %}
+
+{% block title %}{{ citoyen.nom }} {{ citoyen.prenom }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-10"><h1>{{ citoyen.nom | upper}} {{ citoyen.prenom | capitalize }}</h1></div>
+            <div class="col-2"><button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Options</button>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-2"><h4>Civilité</h4></div>
+            <div class="col-3"></div>
+            <div class="col-4"><h4>Information médical</h4></div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-2">Date de niassance</div>
+            <div class="col-2">{{ citoyen.dateNaissance | date('d-m-Y')}}</div>
+            <div class="col-1"></div>
+            <div class="col-3">Taille :</div>
+            <div class="col-2">{{ citoyen.health.taille ??  'Non renseigné' }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"><hr></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">Age</div>
+            <div class="col-2">{{ citoyen.age }} ans</div>
+            <div class="col-1"></div>
+            <div class="col-3">Poids :</div>
+            <div class="col-2">{{ citoyen.health.poids ?? 'Non renseigné' }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"><hr></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-2">Numéro de téléphone</div>
+            <div class="col-2">{{ citoyen.telephone }}</div>
+            <div class="col-1"></div>
+            <div class="col-3">Groupe sanguin :</div>
+            <div class="col-2">{{ citoyen.health.groupeSanguin ?? 'Non renseigné' }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"><hr></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">Profession</div>
+            <div class="col-2">{{ citoyen.profession | capitalize }}</div>
+            <div class="col-1"></div>
+            <div class="col-1">Allérgie :</div>
+            <div class="col-2">
+                {% if (citoyen.health.allergie is not defined) %}
+                Non renseigné
+                {% elseif (citoyen.health.allergie == false) %}
+                ❌
+                {% elseif (citoyen.health.allergie == true) %}
+                ✅
+                {% endif %}
+            </div>
+            <div class="col-3">
+                {% if ( citoyen.health.allergie is not defined ) %}
+                .
+                {% elseif (citoyen.health.allergie == true ) %}
+                {{ citoyen.health.commentAllergie }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"><hr></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-1"></div>
+            <div class="col-1">Diabète :</div>
+            <div class="col-2">
+                {% if (citoyen.health.diabete is not defined) %}
+                    Non renseigné
+                {% elseif (citoyen.health.diabete == false) %}
+                    ❌
+                {% elseif (citoyen.health.diabete == true) %}
+                    ✅
+                {% endif %}
+            </div>
+            <div class="col-3">
+                {% if ( citoyen.health.diabete is not defined ) %}
+                    .
+                {% elseif (citoyen.health.diabete == true ) %}
+                    {{ citoyen.health.commentDiabete }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-4" style="font-weight: bold">Personne à contacter en cas d'urgence</div>
+            <div class="col-1"></div>
+            <div class="col-1">Asthme :</div>
+            <div class="col-2">
+                {% if (citoyen.health.asthme is not defined) %}
+                    Non renseigné
+                {% elseif (citoyen.health.asthme == false) %}
+                    ❌
+                {% elseif (citoyen.health.asthme == true) %}
+                    ✅
+                {% endif %}
+            </div>
+            <div class="col-3">
+                {% if ( citoyen.health.asthme is not defined ) %}
+                    .
+                {% elseif (citoyen.health.asthme == true ) %}
+                    {{ citoyen.health.commentAsthme }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"><hr></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">Nom :</div>
+            <div class="col-2">{{ citoyen.health.urgNom ?? 'Non renseigné' }}</div>
+            <div class="col-1"></div>
+            <div class="col-1">Cardiaque :</div>
+            <div class="col-2">
+                {% if (citoyen.health.cardiaque is not defined) %}
+                    Non renseigné
+                {% elseif (citoyen.health.cardiaque == false) %}
+                    ❌
+                {% elseif (citoyen.health.cardiaque == true) %}
+                    ✅
+                {% endif %}
+            </div>
+            <div class="col-3">
+                {% if ( citoyen.health.cardiaque is not defined ) %}
+                    .
+                {% elseif (citoyen.health.cardiaque == true ) %}
+                    {{ citoyen.health.commentCardiaque }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"><hr></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">Contact :</div>
+            <div class="col-2">{{ citoyen.health.urgTelephone ?? 'Non renseigné' }}</div>
+            <div class="col-1"></div>
+            <div class="col-1">Epilepsie :</div>
+            <div class="col-2">
+                {% if (citoyen.health.epilepsie is not defined) %}
+                    Non renseigné
+                {% elseif (citoyen.health.epilepsie == false) %}
+                    ❌
+                {% elseif (citoyen.health.epilepsie == true) %}
+                    ✅
+                {% endif %}
+            </div>
+            <div class="col-3">
+                {% if ( citoyen.health.epilepsie is not defined ) %}
+                    .
+                {% elseif (citoyen.health.epilepsie == true ) %}
+                    {{ citoyen.health.commentEpilepsie }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"><hr></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">Commentaire :</div>
+            <div class="col-2">{{ citoyen.health.commentUrg ?? 'Non renseigné' }}</div>
+            <div class="col-1"></div>
+            <div class="col-1">Antecédent </div>
+            <div class="col-2">
+                {% if (citoyen.health.antecedent is not defined) %}
+                    Non renseigné
+                {% elseif (citoyen.health.antecedent == false) %}
+                    ❌
+                {% elseif (citoyen.health.antecedent == true) %}
+                    ✅
+                {% endif %}
+            </div>
+            <div class="col-3">
+                {% if ( citoyen.health.antecedent is not defined ) %}
+                    .
+                {% elseif (citoyen.health.antecedent == true ) %}
+                    {{ citoyen.health.commentAntecedent }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-1"></div>
+            <div class="col-5"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-1"></div>
+            <div class="col-1">Taritement :</div>
+            <div class="col-2">
+                {% if (citoyen.health.traitement is not defined) %}
+                    Non renseigné
+                {% elseif (citoyen.health.traitement == false) %}
+                    ❌
+                {% elseif (citoyen.health.traitement == true) %}
+                    ✅
+                {% endif %}
+            </div>
+            <div class="col-3">
+                {% if ( citoyen.health.traitement is not defined ) %}
+                    .
+                {% elseif (citoyen.health.traitement == true ) %}
+                    {{ citoyen.health.commentTraitement }}
+                {% endif %}
+            </div>
+        </div>
+
+        <br>
+
+        <div class="bg-danger bg-opacity-10 rounded p-3 border border-danger">
+            <div><h4>Commentaires :</h4></div>
+            <div>{{ citoyen.health.postIt ?? 'Non renseigné' }}</div>
+        </div>
+
+
+
+
+        {# Menu offcanvas droite #}
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div><button class="btn btn-danger m-2 "><a class="text-decoration-none text-light" href="{{ path ('app_detail_medical_file', {id: citoyen.id}) }}">Dossier médical</a></button></div>
+                <div><button class="btn btn-danger m-2"><a class="text-decoration-none text-light" href="{{ path ('app_add_info', {id: citoyen.id}) }}">Ajouter information</a></button></div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

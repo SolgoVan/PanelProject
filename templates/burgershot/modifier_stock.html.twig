@@ -1,0 +1,17 @@
+{% extends 'burgershot/index.html.twig' %}
+
+{% block title %}Stock{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <h1>Modification des stocks</h1>
+        <hr>
+            <div class="col-4">
+                {{ form_start(stockForm) }}
+                {{ form_row(stockForm) }}
+                <button class="btn btn-info" type="submit">Valider</button>
+                {{ form_end(stockForm) }}
+            </div>
+    </div>
+{% endblock %}
